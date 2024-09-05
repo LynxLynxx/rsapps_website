@@ -1,10 +1,12 @@
+# .github/workflows/dart.yml
+
 name: build
 
 on:
   push:
-    branches: [main]
-  pull_request_target:
-    branches: [main]
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   preview:
@@ -12,33 +14,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      # Set up Java (required by Flutter for Android builds)
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-
-      # Set up Flutter using subosito/flutter-action
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v1
         with:
-          channel: stable
-          #flutter-version-file: pubspec.yaml  # Points to pubspec.yaml to determine the version
-
-      # Verify Flutter setup
-      - run: flutter --version
-
-      # Flutter commands
+          channel: dev
       - run: flutter pub get
       - run: flutter pub run build_runner build
       - run: flutter build web --release
-
-      # Firebase Hosting deploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_RSAPPS_WEBSITE }}"
-          projectId: rsapps-website
-          channelId: live
-          preview: false
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MY_PROJECT_ID }}"
+          projectId: MY_PROJECT_ID
         env:
+          # FIREBASE_CLI_PREVIEWS: hostingchannels
           FIREBASE_CLI_EXPERIMENTS: webframeworks
