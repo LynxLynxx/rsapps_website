@@ -40,3 +40,5 @@ jobs:
           projectId: rsapps-website
           channelId: "pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}"
           preview: false
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
