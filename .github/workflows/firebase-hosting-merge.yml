@@ -18,3 +18,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RSAPPS_WEBSITE }}'
           channelId: live
           projectId: rsapps-website
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
