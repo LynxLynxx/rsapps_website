@@ -22,7 +22,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version-file: pubspec.yaml  # Points to pubspec.yaml to determine the version
+          #flutter-version-file: pubspec.yaml  # Points to pubspec.yaml to determine the version
 
       # Verify Flutter setup
       - run: flutter --version
